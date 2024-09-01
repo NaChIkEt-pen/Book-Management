@@ -20,9 +20,9 @@ export const InputFields = () => {
   };
   return (
     <div
-      className={`${styles.InputFieldMainDiv} main-div flex justify-end right-16 top-24 absolute bg-pink-200`}
+      className={`${styles.InputFieldMainDiv} main-div flex justify-end p-20 bg-white rounded-l-xl`}
     >
-      <div className="border-2 px-10 py-24 rounded-xl">
+      <div className="border-2 px-10 py-14 rounded-xl">
         <Form.Root
           className="w-[260px]"
           onSubmit={submitFormData}
