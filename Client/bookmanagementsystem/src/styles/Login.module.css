@@ -1,9 +1,8 @@
 .LoginPageMain {
     min-height: 100vh;
-    /* background-image: linear-gradient(330deg, hsl(272, 53%, 50%) 0%, hsl(226, 68%, 56%) 100%); */
     background: radial-gradient(circle at 10% 20%, rgb(91, 140, 245) 0%, rgb(240, 131, 252) 79.4%);
-    /* display: flex;
-    flex-direction: row; */
 }
 
-/* .InputFieldMainDiv {} */
+/* .MarqueeImage{
+
+} */

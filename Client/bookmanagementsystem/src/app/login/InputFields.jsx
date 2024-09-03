@@ -2,6 +2,8 @@
 import React from "react";
 import * as Form from "@radix-ui/react-form";
 import styles from "@/styles/Login.module.css";
+import { CgSmileSad } from "react-icons/cg";
+
 export const InputFields = () => {
   const [serverErrors, setServerErrors] = React.useState({
     email: false,
@@ -17,6 +19,11 @@ export const InputFields = () => {
   };
   const handleClearServerErrors = () => {
     setServerErrors({ email: false, password: false });
+  };
+
+  const test = (event) => {
+    event.preventDefault();
+    console.log("Testing");
   };
   return (
     <div
@@ -59,7 +66,6 @@ export const InputFields = () => {
               />
             </Form.Control>
           </Form.Field>
-
           <Form.Field
             className="grid mb-[10px]"
             name="password"
@@ -91,7 +97,6 @@ export const InputFields = () => {
               />
             </Form.Control>
           </Form.Field>
-
           <Form.Submit asChild>
             <button
               className="box-border w-full text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none mt-[10px]"
@@ -100,6 +105,20 @@ export const InputFields = () => {
               Log In
             </button>
           </Form.Submit>
+          <div className={`flex space-x-2`}>
+            <button
+              className="box-border w-full text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none mt-[10px]"
+              onClick={test}
+            >
+              <CgSmileSad className="space-x-2" /> Password
+            </button>
+            <button
+              className="box-border w-full text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none mt-[10px]"
+              onClick={test}
+            >
+              Sign Up
+            </button>
+          </div>
         </Form.Root>
       </div>
     </div>
