@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import * as Form from "@radix-ui/react-form";
-import styles from "@/styles/Signup.module.css";
+import styles from "@/styles/Login.module.css";
 import { CgSmileSad } from "react-icons/cg";
 
 export const InputFields = () => {
@@ -21,13 +21,14 @@ export const InputFields = () => {
     setServerErrors({ email: false, password: false });
   };
 
-  const openForgotPassword = (event) => {
+  const test = (event) => {
     event.preventDefault();
-    console.log("openForgotPasswording");
+    console.log("Testing");
   };
-  const openSignup = (event) => {
+
+  const openLogin = (event) => {
     event.preventDefault();
-    window.open("/signup", "_self");
+    window.open("/login", "_self");
   };
   return (
     <div
@@ -112,15 +113,15 @@ export const InputFields = () => {
           <div className={`flex space-x-2`}>
             <button
               className="box-border w-full text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none mt-[10px]"
-              onClick={openForgotPassword}
+              onClick={test}
             >
               <CgSmileSad className="space-x-2" /> Password
             </button>
             <button
               className="box-border w-full text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none mt-[10px]"
-              onClick={openSignup}
+              onClick={openLogin}
             >
-              Sign In
+              Log In
             </button>
           </div>
         </Form.Root>
