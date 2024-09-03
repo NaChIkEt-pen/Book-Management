@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "../../auth.js";
+import { signIn, signOut } from "../../auth.js";
 
 export async function doGoogleLogin(formdata) {
   await signIn("google", { redirectTo: "/home" });
@@ -8,5 +8,5 @@ export async function doGoogleLogin(formdata) {
 }
 
 export async function doLogout() {
-  return null;
+  await signOut({ redirectTo: "/" });
 }

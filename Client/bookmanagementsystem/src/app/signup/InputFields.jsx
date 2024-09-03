@@ -2,7 +2,9 @@
 import React from "react";
 import * as Form from "@radix-ui/react-form";
 import styles from "../../styles/Login.module.css";
+import { FaGoogle } from "react-icons/fa6";
 import { CgSmileSad } from "react-icons/cg";
+import { doGoogleLogin } from "../actions";
 
 export const InputFields = () => {
   const [serverErrors, setServerErrors] = React.useState({
@@ -29,6 +31,11 @@ export const InputFields = () => {
   const openLogin = (event) => {
     event.preventDefault();
     window.open("/login", "_self");
+  };
+
+  const openGoogleLogin = (event) => {
+    event.preventDefault();
+    doGoogleLogin();
   };
   return (
     <div
@@ -124,6 +131,12 @@ export const InputFields = () => {
               Log In
             </button>
           </div>
+          <button
+            className="box-border w-full text-violet11 shadow-blackA4 hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none mt-[10px]"
+            onClick={openGoogleLogin}
+          >
+            <FaGoogle className="space-x-5" /> Log In via Google
+          </button>
         </Form.Root>
       </div>
     </div>
