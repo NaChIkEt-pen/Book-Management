@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import * as Form from "@radix-ui/react-form";
-import styles from "@/styles/Login.module.css";
+import styles from "../../styles/Login.module.css";
 import { CgSmileSad } from "react-icons/cg";
 
 export const InputFields = () => {

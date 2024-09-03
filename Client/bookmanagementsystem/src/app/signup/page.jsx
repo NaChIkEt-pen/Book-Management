@@ -1,6 +1,6 @@
 import React from "react";
 import { InputFields } from "./InputFields";
-import styles from "@/styles/Login.module.css";
+import styles from "../../styles/Login.module.css";
 import Image from "next/image";
 const page = () => {
   return (

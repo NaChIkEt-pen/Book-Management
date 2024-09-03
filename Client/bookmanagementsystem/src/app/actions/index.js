@@ -1,9 +1,9 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn } from "../../auth.js";
 
 export async function doGoogleLogin(formdata) {
-  await signIn("google", { redirectTo: "/" });
+  await signIn("google", { redirectTo: "/home" });
   console.log("Google Login");
 }
 
