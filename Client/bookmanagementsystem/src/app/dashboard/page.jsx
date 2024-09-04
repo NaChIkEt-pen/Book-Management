@@ -14,14 +14,16 @@ const DashBoardPage = async () => {
     <div className={`DashBoardPagePrimary`}>
       <NavBar />
       <div className="flex flex-col items-center m-4">
-        <h1 className="text-3xl my-2">Welcome, {session?.user?.name}</h1>
-        <Image
+        <h1 className="text-violet11 text-3xl my-2">
+          Welcome, {session?.user?.name.split(" ")[0]}
+        </h1>
+        {/* <Image
           src={session?.user?.image}
           alt={session?.user?.name}
           width={72}
           height={72}
           className="rounded-full"
-        />
+        /> */}
         <Logout />
       </div>
     </div>
