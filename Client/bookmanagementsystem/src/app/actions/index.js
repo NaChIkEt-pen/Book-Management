@@ -3,7 +3,7 @@
 import { signIn, signOut } from "../../auth.js";
 
 export async function doGoogleLogin(formdata) {
-  await signIn("google", { redirectTo: "/home" });
+  await signIn("google", { redirectTo: "/dashboard" });
   console.log("Google Login");
 }
 

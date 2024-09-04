@@ -2,7 +2,12 @@ import React from "react";
 import { InputFields } from "./InputFields";
 import styles from "../../styles/Login.module.css";
 import Image from "next/image";
-const page = () => {
+import { redirect } from "next/navigation";
+import { auth } from "../../auth";
+const page = async () => {
+  const session = await auth();
+
+  if (session?.user) redirect("/dashboard");
   return (
     <div>
       <div className={`${styles.LoginPageMain} z-0 flex `}>
