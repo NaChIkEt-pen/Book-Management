@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Logout from "../components/LogOut";
+import BookShowCase from "../components/DashBoard/BookShowCase";
 import { auth } from "../../auth";
 
 import { redirect } from "next/navigation";
@@ -24,7 +25,8 @@ const DashBoardPage = async () => {
           height={72}
           className="rounded-full"
         /> */}
-        <Logout />
+        {/* <Logout /> */}
+        <BookShowCase />
       </div>
     </div>
   );
