@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function MainBanner() {
   const router = useRouter();
   return (
-    <div className={`flex ${styles.BannerMainDiv} w-full pt-10 pl-5 `}>
+    <div className={`flex ${styles.BannerMainDiv} w-full pt-10 pl-5 pb-10`}>
       <div className={`flex-col`}>
         <h1
           className={`text-7xl text-white overflow-ellipsis text-left font-medium font-sans`}
@@ -20,7 +20,7 @@ export default function MainBanner() {
         </h3>
         <div className="flex">
           <button
-            className={`mt-4 flex items-center border border-white bg-purple-500 text-white py-2 px-4 rounded-full font-medium hover:bg-crimson-700 focus:outline-none focus:ring-2 focus:ring-crimson-500 focus:ring-offset-2`}
+            className={`mt-4 flex items-center border border-white bg-fuchsia-500 text-white py-2 px-4 rounded-full font-medium hover:bg-crimson-700 focus:outline-none focus:ring-2 focus:ring-crimson-500 focus:ring-offset-2`}
             onClick={() => router.push("/login")}
           >
             Get Started <FaLocationArrow className="ml-2" />

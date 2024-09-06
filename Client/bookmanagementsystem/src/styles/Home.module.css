@@ -1,6 +1,14 @@
 .HomeFirstMainDiv {
     /* background: radial-gradient(circle at 10% 20%, rgb(91, 140, 245) 0%, rgb(240, 131, 252) 79.4%); */
-    background: radial-gradient(circle at 10% 20%, rgb(84, 137, 252) 0%, rgb(240, 108, 254) 79.4%);
-
+    /* background: radial-gradient(circle at 10% 20%, rgb(84, 137, 252) 0%, rgb(240, 108, 254) 79.4%); */
+    /* background: #DEB3F9;
+    background: radial-gradient(at left center, #DEB3F9, #D292F7); */
     /* background-color: red; */
+    background: #7735E9;
+    background: radial-gradient(at center top, #7735E9, #AC6EF1);
+}
+
+.HomeMainDiv {
+    background: #7735E9;
+    background: radial-gradient(at center top, #7735E9, #AC6EF1);
 }
