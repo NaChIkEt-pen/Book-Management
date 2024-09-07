@@ -1,13 +1,20 @@
-const express = require("express");
-const app = express();
+import express from "express";
+import { PrismaClient } from "@prisma/client";
+import book_router from "./routes/book.js";
 
+const app = express();
+const prisma = new PrismaClient();
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
+app.get("/", async (req, res) => {
+  const book = await prisma.book.create({
+    data: {
+      bookName: "Dune 3",
+      ownerId: 123
+    },
+  });
+  res.send(book);
 });
-
-const book_router = require("./routes/book");
 
 // Middleware
 app.use("/book", book_router);

@@ -1,11 +1,7 @@
-const getAllBooks = async (req, res) => {
-  console.log("getAllBooks route hit");
-  res.status(200).json({ msg: "All books found" });
+export const getAllBooks = (req, res) => {
+  res.send("All books fetched successfully");
 };
 
-const postBooks = async (req, res) => {
-  console.log("postBook route hit");
-  res.status(201).json({ msg: "Book created" });
+export const postBooks = (req, res) => {
+  res.send("Book added successfully");
 };
-
-module.exports = { getAllBooks, postBooks };
