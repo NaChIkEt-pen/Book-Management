@@ -1,8 +1,7 @@
 import React from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
-// import { CaretDownIcon } from "@radix-ui/react-icons";
 import * as Avatar from "@radix-ui/react-avatar";
-import classNames from "classnames";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { auth } from "../../../auth";
 import Logout from "../LogOut";
 
@@ -16,6 +15,7 @@ const getInitials = (name) => {
 const NavBar = async () => {
   const session = await auth();
   const userInitials = getInitials(session?.user?.name);
+
   return (
     <div>
       <div className={`NavbarMain flex`}>
@@ -54,21 +54,42 @@ const NavBar = async () => {
             <NavigationMenu.Viewport className="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut relative mt-[10px] h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-[6px] bg-white transition-[width,_height] duration-300 sm:w-[var(--radix-navigation-menu-viewport-width)]" />
           </div>
         </NavigationMenu.Root>
-        <Avatar.Root className="bg-blackA1 inline-flex h-[38px] w-[38px] select-none items-center justify-center overflow-hidden rounded-full align-middle mt-1 mr-1">
-          <Avatar.Image
-            className="h-full w-full rounded-[inherit] object-cover"
-            src={session?.user?.image}
-            alt={session?.user?.name}
-          />
-          <Avatar.Fallback
-            className="text-violet11 leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium pt-2 pr-2"
-            delayMs={600}
-          >
-            {userInitials}
-          </Avatar.Fallback>
-        </Avatar.Root>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger asChild>
+            <Avatar.Root className="bg-blackA1 inline-flex h-[38px] w-[38px] select-none items-center justify-center overflow-hidden rounded-full align-middle mt-1 mr-1 cursor-pointer">
+              <Avatar.Image
+                className="h-full w-full rounded-[inherit] object-cover"
+                src={session?.user?.image}
+                alt={session?.user?.name}
+              />
+              <Avatar.Fallback
+                className="text-violet11 leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium pt-2 pr-2"
+                delayMs={600}
+              >
+                {userInitials}
+              </Avatar.Fallback>
+            </Avatar.Root>
+          </DropdownMenu.Trigger>
+
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content
+              className="bg-white rounded-md shadow-lg p-2"
+              sideOffset={5}
+              align="end"
+            >
+              {/* <DropdownMenu.Item className="p-2 hover:bg-gray-100 rounded cursor-pointer">
+                Profile
+              </DropdownMenu.Item> */}
+              {/* <DropdownMenu.Separator className="my-2 h-[1px] bg-gray-200" /> */}
+              <DropdownMenu.Item className="pt-0 hover:bg-gray-100 rounded cursor-pointer">
+                <Logout />
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
+        </DropdownMenu.Root>
       </div>
     </div>
   );
 };
+
 export default NavBar;
