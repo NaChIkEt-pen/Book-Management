@@ -30,11 +30,15 @@ export const getOwnerBooks = async (req, res) => {
 
 // Post a new book
 export const postBooks = async (req, res) => {
+  console.log(req.body);
   try {
     const book = await prisma.book.create({
       data: {
         bookName: req.body.bookName,
         ownerId: req.body.ownerId,
+        author: req.body.author || null,
+        genre: req.body.genre || null,
+        summary: req.body.summary || null,
       },
     });
     res.status(201).json(book); // 201 Created

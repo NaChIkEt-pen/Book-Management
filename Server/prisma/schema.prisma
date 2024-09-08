@@ -16,8 +16,10 @@ datasource db {
 model Book {
   bookId   String  @id @default(uuid())
   bookName String
-  ownerId  Int
+  ownerId  String
   author   String?
   genre    String?
   summary  String?
+
+  @@unique([bookName, ownerId])
 }
