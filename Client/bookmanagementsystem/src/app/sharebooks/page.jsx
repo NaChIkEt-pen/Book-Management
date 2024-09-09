@@ -1,7 +1,14 @@
 import React from "react";
-
-function shareBooks() {
-  return <div>shareBooks</div>;
-}
+import NavBar from "../components/DashBoard/NavBar";
+import { auth } from "../../auth";
+import FileUploadFields from "./FileUploadFields";
+const shareBooks = () => {
+  return (
+    <div className="sharebooksprimary">
+      <NavBar />
+      <FileUploadFields />
+    </div>
+  );
+};
 
 export default shareBooks;
