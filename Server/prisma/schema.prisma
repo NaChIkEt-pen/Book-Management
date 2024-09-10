@@ -20,6 +20,7 @@ model Book {
   author   String?
   genre    String?
   summary  String?
+  path     String
 
   @@unique([bookName, ownerId])
 }
