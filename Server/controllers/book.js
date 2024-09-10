@@ -15,7 +15,8 @@ export const getOwnerBooks = async (req, res) => {
   try {
     const books = await prisma.book.findMany({
       where: {
-        ownerId: parseInt(req.params.ownerId),
+        // ownerId: parseInt(req.params.ownerId),
+        ownerId: req.params.ownerId,
       },
     });
     if (books.length === 0) {
