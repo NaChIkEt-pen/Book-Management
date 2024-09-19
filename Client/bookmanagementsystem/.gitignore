@@ -35,5 +35,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-
 .env
+
+# Miscellaneous
+.DS_Store
+
+# Static files output
+/.cache
+
+# IDE specific (e.g., WebStorm, VSCode)
+/.idea
+.vscode
