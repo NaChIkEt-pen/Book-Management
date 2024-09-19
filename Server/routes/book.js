@@ -1,6 +1,6 @@
 import express from "express";
 import fs from "fs";
-import { getAllBooks, postBooks, getOwnerBooks } from "../controllers/book.js";
+import { getAllBooks, postBooks, getOwnerBooks, deleteBook } from "../controllers/book.js";
 
 const router = express.Router();
 
@@ -45,5 +45,7 @@ const upload = multer({
 router.route("/get-all-book").get(getAllBooks);
 router.route("/get-book/:ownerId").get(getOwnerBooks);
 router.route("/post-book").post(upload.single("bookFile"), postBooks);
+router.route("/delete-book/:id").delete(deleteBook);
+
 
 export default router;

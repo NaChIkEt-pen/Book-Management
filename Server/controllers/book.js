@@ -1,4 +1,11 @@
 import { prisma } from "../server.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Get the current directory for ES6 modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Get all books
 export const getAllBooks = async (req, res) => {
@@ -46,5 +53,42 @@ export const postBooks = async (req, res) => {
     res.status(201).json(book); // 201 Created
   } catch (error) {
     res.status(400).json({ error: "Failed to create book" }); // 400 Bad Request
+  }
+};
+
+// Delete a book by ID
+export const deleteBook = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find the book by ID first (optional but good for validation)
+    const book = await prisma.book.findUnique({
+      where: { bookId: id },
+    });
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    // Construct the file path (ensure it matches how the file is stored)
+    const filePath = path.join(__dirname, "../uploads/", book.path);
+
+    // Delete the file from the uploads folder
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error("Error deleting file:", err);
+        return res.status(500).json({ error: "Failed to delete file" });
+      }
+    });
+
+    // Delete the book
+    await prisma.book.delete({
+      where: { bookId: id },
+    });
+
+    res.status(200).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting book:", error);
+    res.status(500).json({ error: "Failed to delete book" });
   }
 };
