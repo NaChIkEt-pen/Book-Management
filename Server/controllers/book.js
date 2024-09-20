@@ -51,7 +51,7 @@ export const postBooks = async (req, res) => {
     });
     res.status(201).json(book); // 201 Created
   } catch (error) {
-    res.status(400).json({ error: "Failed to create book" }); // 400 Bad Request
+    res.status(400).json({ error: "Failed to create book"}); // 400 Bad Request
   }
 };
 

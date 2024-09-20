@@ -16,7 +16,7 @@ export async function GET(req) {
 
   try {
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_BACKENDURL}:${process.env.NEXT_PUBLIC_BACKENDPORT}/book/get-all-books`
+      `${process.env.NEXT_PUBLIC_BACKENDURL}:${process.env.NEXT_PUBLIC_BACKENDPORT}/book/get-all-book`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
