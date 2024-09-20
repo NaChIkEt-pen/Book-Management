@@ -38,7 +38,6 @@ export const getOwnerBooks = async (req, res) => {
 
 // Post a new book
 export const postBooks = async (req, res) => {
-  console.log(req.file.filename);
   try {
     const book = await prisma.book.create({
       data: {
@@ -73,11 +72,13 @@ export const deleteBook = async (req, res) => {
     // Construct the file path (ensure it matches how the file is stored)
     const filePath = path.join(__dirname, "../uploads/", book.path);
 
+    let deleteFileError = false;
+
     // Delete the file from the uploads folder
     fs.unlink(filePath, (err) => {
       if (err) {
         console.error("Error deleting file:", err);
-        return res.status(500).json({ error: "Failed to delete file" });
+        deleteFileError = true;
       }
     });
 
@@ -85,6 +86,13 @@ export const deleteBook = async (req, res) => {
     await prisma.book.delete({
       where: { bookId: id },
     });
+
+    // Return success message but include the file deletion status
+    if (deleteFileError) {
+      return res
+        .status(200)
+        .json({ message: "Book deleted but file deletion failed" });
+    }
 
     res.status(200).json({ message: "Book deleted successfully" });
   } catch (error) {
