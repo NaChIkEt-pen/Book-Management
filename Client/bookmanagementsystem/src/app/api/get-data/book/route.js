@@ -26,6 +26,6 @@ export async function GET(req) {
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error Fetching books", error);
-    return NextResponse.error("Intenal Server errr", 500);
+    return NextResponse.error("Internal Server errr", 500);
   }
 }

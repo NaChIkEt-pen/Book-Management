@@ -2,18 +2,58 @@
 import React from "react";
 import * as Form from "@radix-ui/react-form";
 const FileUploadFields = () => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    console.log("File uploaded:", formData.get("bookname"));
-    console.log("File uploaded:", formData.get("file"));
+
+    // Log formData to see what is being sent
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+    try {
+      const response = await fetch("/api/post-data/book", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Success:", result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   return (
     <div>
       <div className="flex justify-center p-20 bg-white rounded-l-xl">
         <div className="border-2 px-10 py-14 rounded-xl">
           <Form.Root className="w-[260px]" onSubmit={handleSubmit}>
-            <Form.Field className="grid mb-[10px]" name="bookname">
+            <Form.Field className="grid mb-[10px]" name="ownerId">
+              <div className="flex items-baseline justify-between">
+                <Form.Label className="text-[15px] font-medium leading-[35px] text-black">
+                  Owner ID
+                </Form.Label>
+                <Form.Message
+                  className="text-[13px] text-black opacity-[0.8]"
+                  match="valueMissing"
+                >
+                  Please enter your owner ID
+                </Form.Message>
+              </div>
+              <Form.Control asChild>
+                <input
+                  className="box-border w-full bg-blackA2 shadow-blackA6 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-black selection:bg-blackA6"
+                  type="text"
+                  required
+                />
+              </Form.Control>
+            </Form.Field>
+
+            <Form.Field className="grid mb-[10px]" name="bookName">
               <div className="flex items-baseline justify-between">
                 <Form.Label className="text-[15px] font-medium leading-[35px] text-black">
                   Book Name
@@ -33,7 +73,7 @@ const FileUploadFields = () => {
                 />
               </Form.Control>
             </Form.Field>
-            <Form.Field className="grid mb-[10px]" name="authorname">
+            <Form.Field className="grid mb-[10px]" name="author">
               <div className="flex items-baseline justify-between">
                 <Form.Label className="text-[15px] font-medium leading-[35px] text-black">
                   Author Name
@@ -53,7 +93,7 @@ const FileUploadFields = () => {
                 />
               </Form.Control>
             </Form.Field>
-            <Form.Field className="grid mb-[10px]" name="file">
+            <Form.Field className="grid mb-[10px]" name="bookFile">
               <div className="flex items-baseline justify-between">
                 <Form.Label className="text-[15px] font-medium leading-[35px] text-black">
                   Upload Book Cover
