@@ -1,7 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import * as Form from "@radix-ui/react-form";
+import * as Toast from "@radix-ui/react-toast";
+
 const FileUploadFields = () => {
+  const [open, setOpen] = useState(false);
+  const [toastColor, setToastColor] = useState("");
+  const [toastTitle, setToastTitle] = useState("");
+  const [toastDescription, setToastDescription] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -18,19 +25,49 @@ const FileUploadFields = () => {
       });
 
       if (!response.ok) {
+        setToastColor("bg-red-500");
+        setToastTitle("Failed to Share Book");
+        setToastDescription(
+          "Maybe you shared this book already? Try another one."
+        );
+        console.log("HTTP error! status: ", response.status);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      setToastColor("bg-green-500");
+      setToastTitle("Book Shared");
+      setToastDescription("Your book has been successfully shared!");
 
       const result = await response.json();
       console.log("Success:", result);
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setOpen(true);
     }
   };
   return (
-    <div>
+    <div className="relative">
+      {/* This is the wrapper for relative positioning */}
       <div className="flex justify-center p-20 bg-white rounded-l-xl">
-        <div className="border-2 px-10 py-14 rounded-xl">
+        <div className="border-2 px-10 py-12 rounded-xl">
+          {/* Toast Notification for success */}
+          <Toast.Provider>
+            <Toast.Root
+              open={open}
+              onOpenChange={setOpen} // Allow closing after showing
+              className={`${toastColor} absolute top-3 right-10  text-white p-4 rounded-md shadow-2xl `}
+            >
+              <Toast.Title className="text-xl font-bold">
+                {toastTitle}
+              </Toast.Title>
+              <Toast.Description className="text-sm">
+                {toastDescription}
+              </Toast.Description>
+            </Toast.Root>
+            <Toast.Viewport />
+          </Toast.Provider>
+
           <Form.Root className="w-[260px]" onSubmit={handleSubmit}>
             <Form.Field className="grid mb-[10px]" name="ownerId">
               <div className="flex items-baseline justify-between">

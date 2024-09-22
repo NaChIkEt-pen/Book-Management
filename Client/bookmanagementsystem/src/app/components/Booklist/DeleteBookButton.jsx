@@ -1,25 +1,25 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import * as Toast from "@radix-ui/react-toast";
 
 const DeleteBookButton = ({ bookId }) => {
   const [open, setOpen] = useState(false);
+  const router = useRouter(); // Use Next.js router
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(
-        `/api/delete-data/book/${bookId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/delete-data/book/${bookId}`, {
+        method: "DELETE",
+      });
 
       if (response.ok) {
         // Open the toast notification when successful
         setOpen(true);
-        // Reload the page after 2 seconds, giving time for the user to read the toast
+
+        // Refresh the page (with the new content) after a few seconds
         setTimeout(() => {
-          window.location.reload();
+          router.refresh();
         }, 2000);
       } else {
         throw new Error("Failed to delete book");
@@ -30,23 +30,22 @@ const DeleteBookButton = ({ bookId }) => {
   };
 
   return (
-    <>
+    <div>
       <button onClick={handleDelete}>Delete Book</button>
-
       {/* Toast notification */}
       <Toast.Provider>
-        <Toast.Root open={open} onOpenChange={setOpen}>
-          <Toast.Title>Book Deleted</Toast.Title>
-          <Toast.Description>
+        <Toast.Root
+          open={open}
+          className="bg-red-500 text-white p-4 mb-4 rounded-md shadow-2xl"
+        >
+          <Toast.Title className="text-xl font-bold">Book Deleted</Toast.Title>
+          <Toast.Description className="text-sm">
             The book has been successfully deleted.
           </Toast.Description>
-          <Toast.Action asChild altText="Close">
-            <button>Close</button>
-          </Toast.Action>
         </Toast.Root>
         <Toast.Viewport />
       </Toast.Provider>
-    </>
+    </div>
   );
 };
 

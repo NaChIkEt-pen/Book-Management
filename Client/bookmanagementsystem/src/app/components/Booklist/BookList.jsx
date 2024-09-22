@@ -1,13 +1,9 @@
 import React from "react";
 import DeleteBookButton from "./DeleteBookButton";
+import { getAllBooks, deleteBook } from "../../actions/book";
 
 const BookList = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/get-data/book`,
-    {
-      cache: "no-store", // Ensure no caching for fresh data
-    }
-  );
+  const res = await getAllBooks();
 
   const books = await res.json();
 
@@ -28,7 +24,7 @@ const BookList = async () => {
             <h2 className="text-xl font-semibold">{book.bookName}</h2>
             <p className="text-gray-600">Author: {book.author}</p>
             <DeleteBookButton bookId={book.bookId} />
-            {/* This button will handle deletion */}
+            {/* This button will handle deletion on the Client Side */}
           </div>
         ))}
       </div>

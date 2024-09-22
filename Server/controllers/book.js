@@ -77,7 +77,8 @@ export const deleteBook = async (req, res) => {
     // Delete the file from the uploads folder
     fs.unlink(filePath, (err) => {
       if (err) {
-        console.error("Error deleting file:", err);
+        console.error(`Error deleting file. Couldn't delete in uploads folder a file named: ${book.path} `, err);
+        // console.log(`Book Path: ${book.path}`);
         deleteFileError = true;
       }
     });
