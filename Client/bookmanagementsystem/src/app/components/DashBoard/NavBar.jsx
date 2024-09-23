@@ -46,6 +46,16 @@ const NavBar = async () => {
                 Share Books
               </NavigationMenu.Link>
             </NavigationMenu.Item>
+
+            <NavigationMenu.Item>
+              <NavigationMenu.Link
+                className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+                href="/booklist"
+              >
+                List Books
+              </NavigationMenu.Link>
+            </NavigationMenu.Item>
+
             <NavigationMenu.Indicator className="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full z-[1] flex h-[10px] items-end justify-center overflow-hidden transition-[width,transform_250ms_ease]">
               <div className="relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-white" />
             </NavigationMenu.Indicator>
