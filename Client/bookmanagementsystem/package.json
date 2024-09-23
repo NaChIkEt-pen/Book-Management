@@ -31,6 +31,7 @@
   "devDependencies": {
     "@types/node": "22.5.2",
     "@types/react": "18.3.5",
+    "daisyui": "^4.12.10",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "5.5.4"

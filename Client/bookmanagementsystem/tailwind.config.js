@@ -74,6 +74,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("daisyui"),
     plugin(({ matchUtilities }) => {
       matchUtilities({
         perspective: (value) => ({
