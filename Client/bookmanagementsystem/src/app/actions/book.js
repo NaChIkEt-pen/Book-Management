@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function getAllBooks() {
@@ -41,12 +42,10 @@ export async function deleteBook(bookId) {
       );
     }
 
-    //   return NextResponse.json({ message: "Book deleted successfully" });
-    return { success: true, message: "Book deleted successfully" }; // Return a plain object, not NextResponse
+    // revalidatePath("/booklist");
+
   } catch (error) {
     console.error("Error deleting book:", error);
-    const err = new Error("Failed to delete book. " + error.message);
-    err.status = 500; // Custom property
-    throw err;
+    throw error;
   }
 }

@@ -2,31 +2,25 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import * as Toast from "@radix-ui/react-toast";
+import { deleteBook } from "../../actions/book";
 
 const DeleteBookButton = ({ bookId }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter(); // Use Next.js router
 
   const handleDelete = async () => {
-    try {
-      const response = await fetch(`/api/delete-data/book/${bookId}`, {
-        method: "DELETE",
-      });
+    // Call the deleteBook function from the actions
+    await deleteBook(bookId);
+    console.log("Delete book with ID:", bookId);
 
-      if (response.ok) {
-        // Open the toast notification when successful
-        setOpen(true);
+    // Show the toast notification
+    setOpen(true);
 
-        // Refresh the page (with the new content) after a few seconds
-        setTimeout(() => {
-          router.refresh();
-        }, 2000);
-      } else {
-        throw new Error("Failed to delete book");
-      }
-    } catch (error) {
-      console.error("Error deleting book:", error);
-    }
+    // Refresh the page (with the new content) after a few seconds
+    setTimeout(() => {
+      router.refresh();
+    }, 2000);
+
   };
 
   return (
