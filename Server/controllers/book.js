@@ -13,7 +13,27 @@ export const getAllBooks = async (req, res) => {
     const books = await prisma.book.findMany();
     res.status(200).json(books); // 200 OK
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch books" }); // 500 Internal Server Error
+    // Log the entire error indented for better readability
+    console.log(JSON.stringify(error, null, 2));
+    console.log(error.message);
+
+    // Handle PrismaClientInitializationError
+    if (error.name === "PrismaClientInitializationError") {
+      res.status(503).json({
+        error: "Service unavailable: Unable to connect to the database",
+      }); // 503 Service Unavailable
+    } else if (error.code === "P2021") {
+      // Handle Prisma error for missing table
+      res
+        .status(500)
+        .json({ error: "Database schema error: 'book' table does not exist" });
+    } else {
+      // Catch-all for any other unexpected errors
+      res.status(500).json({
+        error:
+          "Internal Server Error: Failed to extract the data from the database",
+      });
+    }
   }
 };
 
@@ -51,7 +71,7 @@ export const postBooks = async (req, res) => {
     });
     res.status(201).json(book); // 201 Created
   } catch (error) {
-    res.status(400).json({ error: "Failed to create book"}); // 400 Bad Request
+    res.status(400).json({ error: "Failed to create book" }); // 400 Bad Request
   }
 };
 
@@ -77,7 +97,10 @@ export const deleteBook = async (req, res) => {
     // Delete the file from the uploads folder
     fs.unlink(filePath, (err) => {
       if (err) {
-        console.error(`Error deleting file. Couldn't delete in uploads folder a file named: ${book.path} `, err);
+        console.error(
+          `Error deleting file. Couldn't delete in uploads folder a file named: ${book.path} `,
+          err
+        );
         // console.log(`Book Path: ${book.path}`);
         deleteFileError = true;
       }

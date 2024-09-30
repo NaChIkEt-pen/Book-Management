@@ -10,8 +10,9 @@ const DeleteBookButton = ({ bookId }) => {
 
   const handleDelete = async () => {
     // Call the deleteBook function from the actions
-    await deleteBook(bookId);
+    const response = await deleteBook(bookId);
     console.log("Delete book with ID:", bookId);
+    console.log(response.status);
 
     // Show the toast notification
     setOpen(true);
