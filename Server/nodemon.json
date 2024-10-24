@@ -1,0 +1,6 @@
+{
+  "events": {
+    "restart": "node cleanup.js"
+  },
+  "delay": "1000"
+}
