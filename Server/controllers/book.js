@@ -11,7 +11,18 @@ const __dirname = path.dirname(__filename);
 export const getAllBooks = async (req, res) => {
   try {
     const books = await prisma.book.findMany();
-    res.status(200).json(books); // 200 OK
+
+    // Map each book to add the URL to its path
+    const booksWithCovers = books.map((book) => {
+      return {
+        ...book,
+        coverImageUrl: book.path
+          ? `${req.protocol}://${req.get("host")}/uploads/${book.path}`
+          : null,
+      };
+    });
+
+    res.status(200).json(booksWithCovers); // 200 OK
   } catch (error) {
     // Log the entire error indented for better readability
     console.log(JSON.stringify(error, null, 2));

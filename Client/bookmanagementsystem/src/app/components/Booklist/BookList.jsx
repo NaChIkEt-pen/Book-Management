@@ -7,19 +7,34 @@ const BookList = async () => {
     const books = await getAllBooks();
 
     return (
-      <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg">
-        <h1 className="text-2xl font-bold mb-6">Book List</h1>
+      <div className="container p-0 sm:p-6 flex flex-col items-center">
+        <h1 className="text-3xl text-center text-gray-700 font-bold my-10">
+          Book List
+        </h1>
         {/* Tailwind grid setup */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-12">
           {books.map((book) => (
             <div
               key={book.bookId}
-              className="border p-4 rounded-lg shadow-md bg-gray-100"
+              className="card bg-white border border-gray-200 p-4 rounded-lg shadow-xl shadow-gray-600 transition-transform duration-300 ease-in-out hover:scale-105"
             >
-              <h2 className="text-xl font-semibold">{book.bookName}</h2>
-              <p className="text-gray-600">Author: {book.author}</p>
-              <DeleteBookButton bookId={book.bookId} />
-              {/* This button will handle deletion on the Client Side */}
+              <div className="card-body items-center p-0">
+                <h2 className="card-title text-gray-700">{book.bookName}</h2>
+                <h3 className="card-title text-gray-600 text-sm">
+                  Author: {book.author}
+                </h3>
+              </div>
+              <figure className="my-2">
+                <img
+                  className="h-56 rounded-md"
+                  src={book.coverImageUrl}
+                  alt={`${book.bookName} cover`}
+                />
+              </figure>
+              <div className="card-actions justify-center">
+                <DeleteBookButton bookId={book.bookId} />
+                {/* This button will handle deletion on the Client Side */}
+              </div>
             </div>
           ))}
         </div>

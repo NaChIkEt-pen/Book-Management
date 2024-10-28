@@ -11,6 +11,9 @@ app.use(express.json());
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 
+// Middleware to serve static files
+app.use("/uploads", express.static("uploads"));
+
 app.get("/", async (req, res) => {
   res.send("Welcome to Book Place");
 });
